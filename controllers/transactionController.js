@@ -36,6 +36,11 @@ exports.makeTransaction = async (req, res, next) => {
     user.balance = newBalance;
     await user.save();
 
+    const lastTransaction = await Transaction.findOne({ user: req.user._id }).sort({ createdAt: -1 });
+    const balanceAfter = type === "credit" 
+      ? (lastTransaction?.balanceAfter || 0) + amount 
+      : (lastTransaction?.balanceAfter || 0) - amount;
+
     const transaction = await Transaction.create({
       user: user._id,
       type,
@@ -54,11 +59,11 @@ exports.makeTransaction = async (req, res, next) => {
 };
 
 // Optional: Get transactions for the logged-in user
-exports.getTransactions = async (req, res, next) => {
-  try {
-    const transactions = await Transaction.find({ user: req.user._id }).sort({ timestamp: -1 });
-    res.status(200).json({ count: transactions.length, transactions });
-  } catch (error) {
-    next(error);
-  }
+exports.getTransactions = async (req, res) => {
+  const transactions = await Transaction.find({ user: req.user._id }).sort({
+    createdAt: -1
+  });
+
+  res.status(200).json({ transactions, count: transactions.length });
 };
+
