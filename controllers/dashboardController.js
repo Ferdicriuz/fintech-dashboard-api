@@ -38,3 +38,20 @@ exports.getTransactions = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.getDashboard = async (req, res) => {
+  try {
+    const user = req.user; // from protect middleware
+
+    res.status(200).json({
+      success: true,
+      name: user.name,
+      role: user.role,
+      balance: user.balance,
+      profileImage: user.profileImage || null,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Dashboard error" });
+  }
+};
+

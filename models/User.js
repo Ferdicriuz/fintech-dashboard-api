@@ -20,7 +20,13 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 40000,
   },
+
+  profileImage: {
+  type: String,
+},
+
 });
+
 
 // 🔒 Hash password before saving
 userSchema.pre("save", async function (next) {

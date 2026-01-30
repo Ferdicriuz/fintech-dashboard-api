@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>Transaction</title></head>
+<body>
+  <h2>Transaction</h2>
+
+  <form id="txnForm">
+    <input id="amount" type="number" placeholder="Amount" required />
+    <select id="type">
+      <option value="credit">Credit</option>
+      <option value="debit">Debit</option>
+    </select>
+    <input id="description" placeholder="Description" />
+    <button>Submit</button>
+  </form>
+
+  <p id="msg"></p>
+<h3>Transaction History</h3>
+<pre id="transactions">Loading...</pre>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

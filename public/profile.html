@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Upload Profile Image</title>
+</head>
+<body>
+
+  <h2>Upload Profile Picture</h2>
+
+  <form id="uploadForm">
+    <input type="file" name="profile" accept="image/*" required />
+    <button type="submit">Upload</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script>
+    const form = document.getElementById("uploadForm");
+    const status = document.getElementById("status");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const token = localStorage.getItem("token");
+      if (!token) {
+        status.innerText = "Not authenticated";
+        return;
+      }
+
+      const formData = new FormData(form);
+
+      try {
+        const res = await fetch("/api/profile/upload-profile", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${token}`,
+          },
+          body: formData,
+        });
+
+        const data = await res.json();
+        console.log("Upload response:", data);
+
+        if (data.success) {
+          status.innerText = "Upload successful!";
+        } else {
+          status.innerText = data.message;
+        }
+      } catch (err) {
+        status.innerText = "Upload failed";
+      }
+    });
+  </script>
+
+</body>
+</html>

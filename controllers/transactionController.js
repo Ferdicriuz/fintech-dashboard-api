@@ -36,16 +36,12 @@ exports.makeTransaction = async (req, res, next) => {
     user.balance = newBalance;
     await user.save();
 
-    const lastTransaction = await Transaction.findOne({ user: req.user._id }).sort({ createdAt: -1 });
-    const balanceAfter = type === "credit" 
-      ? (lastTransaction?.balanceAfter || 0) + amount 
-      : (lastTransaction?.balanceAfter || 0) - amount;
-
     const transaction = await Transaction.create({
       user: user._id,
       type,
       amount,
       balanceAfter: newBalance,
+      
     });
 
     res.status(201).json({

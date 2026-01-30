@@ -81,3 +81,9 @@ exports.login = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.getMe = async (req, res) => {
+  const user = req.user; // from protect middleware
+  if (!user) return res.status(404).json({ message: "User not found" });
+  res.status(200).json(user);
+};
