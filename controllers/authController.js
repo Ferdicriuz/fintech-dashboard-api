@@ -76,6 +76,7 @@ exports.login = async (req, res) => {
         role: user.role,
       },
     });
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error.message });

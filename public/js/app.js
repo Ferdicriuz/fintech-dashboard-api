@@ -34,6 +34,9 @@ if (signupForm) {
 /* ======================
    LOGIN
 ====================== */
+
+const API = 'https://fintech-dashboard-api-production-14ac.up.railway.app/'
+
 const loginForm = document.getElementById("loginForm");
 
 if (loginForm) {
