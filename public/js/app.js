@@ -35,7 +35,7 @@ if (signupForm) {
    LOGIN
 ====================== */
 
-const API = 'https://fintech-dashboard-api-production-14ac.up.railway.app/'
+const API = 'https://fintech-dashboard-api-brown.vercel.app/'
 
 const loginForm = document.getElementById("loginForm");
 
