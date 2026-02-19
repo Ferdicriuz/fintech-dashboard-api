@@ -43,29 +43,6 @@ if (loginForm) {
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-//     const emailInput = document.getElementById("email").value;
-//     const passwordInput = document.getElementById("password").value;
-
-//     const res = await fetch(`${BASE_URL}/api/auth/login`, {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({
-//         email: emailInput,
-//         password: passwordInput
-//       })
-//     });
-
-//     const data = await res.json();
-
-//     if (res.ok && data.token) {
-//       localStorage.setItem("token", data.token);
-//       window.location.href = "/dashboard.html";
-//     } else {
-//       alert(data.message || "Login failed");
-//     }
-//   });
-// }
-
 const email = document.getElementById("email").value;
 const password = document.getElementById("password").value;
 
